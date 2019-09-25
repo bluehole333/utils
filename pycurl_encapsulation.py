@@ -1,4 +1,5 @@
 import pycurl
+from io import StringIO
 
 
 def _call(resource, method, data=None, headers=None, timeout=None, debug=None):
