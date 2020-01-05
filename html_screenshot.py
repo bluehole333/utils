@@ -1,9 +1,14 @@
 from selenium import webdriver
-import time
-import os.path
 
 
-def webshot(url, save_name):
+def simple_web_screenshot(url, save_name):
+    browser = webdriver.Firefox()
+    browser.get(url)
+    browser.save_screenshot(save_name)
+    browser.quit()
+
+
+def full_web_screenshot(url, save_name):
     options = webdriver.FirefoxOptions()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
@@ -29,7 +34,12 @@ def webshot(url, save_name):
     print(scroll_width, scroll_height)
     driver.set_window_size(scroll_width, scroll_height)
     driver.get_screenshot_as_file(save_name)
+    driver.quit()
 
 
 if __name__ == '__main__':
-    webshot('https://baidu.com', 'badiu.png')
+    # 默认窗口截图
+    simple_web_screenshot('https://baidu.com', 'simple_badiu.png')
+
+    # 截取网页完整（长图）图片
+    full_web_screenshot('https://baidu.com', 'full_badiu.png')
